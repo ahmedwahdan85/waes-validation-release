@@ -1,0 +1,13 @@
+WAES-256 counter mode with AES-NI (software/waes_aesni.rs)
+CPU   : Intel Core i7-13650HX (14 cores, 20 threads)
+Build : rustc --edition 2021 -C opt-level=3 -C target-cpu=native waes_aesni.rs
+Check : 784/784 WAES-256 known-answer vectors (reference/gen_vectors.py) passed;
+        counter-mode keystream matches reference/rijndael_ref.py
+Data  : 1 MiB buffer per thread (in cache), 10 s per measurement
+
+Run 1:
+WAES-256 CTR, AES-NI, 1 thread       :    26.42 Gbps
+WAES-256 CTR, AES-NI, 20 threads     :   276.36 Gbps
+Run 2:
+WAES-256 CTR, AES-NI, 1 thread       :    26.39 Gbps
+WAES-256 CTR, AES-NI, 20 threads     :   271.05 Gbps

@@ -40,6 +40,8 @@ All 256-bit fields are in Rijndael byte order (byte 0 first).
 | `validator/waes_monitor.py` | Validation application: receiver process (loss detection from sequence numbers), parallel validator processes, live statistics and report. |
 | `sample/sample_packets.txt` | 40 sample packets (one hex payload per line). |
 | `results/waes_ctr_validation_report.json`, `.txt` | Report of the 1-hour run in the paper. |
+| `software/waes_aesni.rs` | WAES-256 counter mode on x86 with AES-NI (software comparison). |
+| `results/aesni_benchmark.txt` | AES-NI benchmark results. |
 
 ## Running
 
@@ -63,3 +65,18 @@ python validator/waes_monitor.py                         # live validation (FPGA
 | Plaintext/decrypted mismatches | 0 |
 | Ciphertext mismatches | 0 |
 | Counter-rule violations | 0 |
+
+## Software comparison (AES-NI)
+`software/waes_aesni.rs` implements WAES-256 in counter mode with the x86 AES-NI instructions. The 256-bit state is held as two 128-bit halves; a cross-half byte permutation (PSHUFB) before every AESENC/AESENCLAST realizes the WAES-256 ShiftRows (offsets 0, 1, 3, 4).
+
+```
+rustc --edition 2021 -C opt-level=3 -C target-cpu=native software/waes_aesni.rs
+python reference/gen_vectors.py vectors.txt
+waes_aesni verify vectors.txt        # 784 known-answer vectors
+waes_aesni bench 10                  # 1 thread and all threads
+```
+
+| CPU | Threads | Throughput |
+|---|---|---|
+| Intel Core i7-13650HX | 1 | 26.4 Gbps |
+| Intel Core i7-13650HX | 20 | 271.1 - 276.4 Gbps |
