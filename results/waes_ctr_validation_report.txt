@@ -1,0 +1,14 @@
+duration                : 3604.4 s
+packets sent (seq span) : 113085178
+packets received        : 113085178
+packets lost (seq gaps) : 0
+packets late/duplicate  : 0
+packets not validated   : 0
+packets validated       : 113085178
+records verified        : 1243936958  (39805982656 plaintext bytes)
+sessions / keys / nonces: 1766957 / 1766957 / 1766957
+records per stall profile (0/25/50/75 %): 310984256 / 310984256 / 310984256 / 310984190
+format errors           : 0
+cipher mismatches       : 0
+plaintext/decrypted mismatches: 0
+counter-rule violations : 0

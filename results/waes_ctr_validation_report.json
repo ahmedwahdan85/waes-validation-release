@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-09 20:42:25",
+  "duration_s": 3604.4,
+  "fpga_ip": "192.168.1.50",
+  "udp_port": 17767,
+  "packets_sent_by_fpga_in_span": 113085178,
+  "packets_received": 113085178,
+  "packets_lost_seq_gaps": 0,
+  "packets_late_or_duplicate": 0,
+  "packets_not_validated_backlog": 0,
+  "packets_validated": 113085178,
+  "records_verified": 1243936958,
+  "plaintext_bytes_compared": 39805982656,
+  "sessions": 1766957,
+  "keys": 1766957,
+  "nonces": 1766957,
+  "records_per_stall_profile_0_25_50_75": [
+    310984256,
+    310984256,
+    310984256,
+    310984190
+  ],
+  "format_errors": 0,
+  "ciphertext_mismatches": 0,
+  "plaintext_decrypted_mismatches": 0,
+  "counter_rule_violations": 0,
+  "socket_receive_buffer_bytes": 268435456,
+  "error_samples": []
+}
