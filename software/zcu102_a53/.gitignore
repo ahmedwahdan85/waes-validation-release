@@ -1,0 +1,5 @@
+hw/
+ws/
+build/
+src/vectors.h
+*.log

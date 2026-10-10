@@ -80,3 +80,20 @@ waes_aesni bench 10                  # 1 thread and all threads
 |---|---|---|
 | Intel Core i7-13650HX | 1 | 26.4 Gbps |
 | Intel Core i7-13650HX | 20 | 271.1 - 276.4 Gbps |
+
+## Software comparison (ZCU102 processing system, Cortex-A53)
+`software/zcu102_a53/` implements WAES-256 in counter mode bare-metal on the four Cortex-A53 cores of the ZCU102 processing system (PS only, no PL logic, no bitstream), with the ARMv8 Cryptography Extensions. AESE/AESMC operate on the two 128-bit halves of the state; one TBL per half before every AESE realizes the WAES-256 ShiftRows, and the round keys are permuted once at key setup. The program first checks the 784 known-answer vectors and a counter-mode keystream from `reference/`, then measures counter mode for 10 s on one core and 10 s on all four cores (128 KiB buffer per core, in cache).
+
+```
+scripts\make_xsa.bat                 # PS-only hardware platform (Vivado 2025.2)
+scripts\make_platform.bat            # Vitis platform: standalone domain per A53 core, FSBL
+python scripts\gen_vectors_h.py      # known-answer vectors -> src/vectors.h
+python scripts\build_apps.py         # one ELF per core
+python scripts\uart_log.py COMx      # UART0 capture
+scripts\run_fsbl.bat                 # JTAG: FSBL, then the 4 images
+```
+
+| Processor | Cores | Throughput |
+|---|---|---|
+| ZCU102 PS, Cortex-A53 at 1.2 GHz | 1 | 1.74 Gbps |
+| ZCU102 PS, Cortex-A53 at 1.2 GHz | 4 | 6.98 Gbps |

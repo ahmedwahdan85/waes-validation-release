@@ -1,0 +1,10 @@
+WAES-256 counter mode, ZCU102 PS only (4x Cortex-A53, 1199 MHz measured), bare-metal, no PL
+ARMv8 Cryptography Extensions (AESE/AESMC + TBL ShiftRows permutation), 128 KiB buffer per core in cache, 10 s per measurement
+Initialization: platform FSBL over JTAG, then one standalone image per core
+Check: 784/784 known-answer vectors and 37/37 counter-mode keystream blocks match the reference model (every run)
+
+Blocks in flight per core | 1 core     | 4 cores
+2                         | 1.66 Gbps  | 6.63 Gbps
+4                         | 1.71 Gbps  | 6.85 Gbps
+8                         | 1.74 Gbps  | 6.98 Gbps   (run 1)
+8                         | 1.74 Gbps  | 6.98 Gbps   (run 2)

@@ -1,0 +1,13 @@
+Zynq MP First Stage Boot Loader
+Release 2025.2   Oct 10 2026  -  12:17:36
+PMU-FW is not running, certain applications may not be supported.
+WAES-256 CTR, ARMv8 Cryptography Extensions, ZCU102 PS (Cortex-A53), bare-metal
+CPU clock   : 1199 MHz (measured)
+Timer clock : 99990005 Hz
+Buffer      : 128 KiB per core, 10 s per measurement
+Interleave  : 4 blocks in flight per core
+verify: 784 vectors, 0 mismatches
+verify: counter-mode keystream, 37 blocks, 0 mismatches
+WAES-256 CTR, ARMv8-CE, 1 core :    1.71 Gbps
+WAES-256 CTR, ARMv8-CE, 4 cores:    6.85 Gbps
+done
